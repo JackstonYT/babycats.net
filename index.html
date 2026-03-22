@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Coming Soon</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pink:   #c45080;
+      --lime:   #6aaa30;
+      --red:    #b83030;
+      --brown:  #8a5530;
+      --blue:   #3a6aaa;
+      --bg:     #0e0e12;
+      --ink:    #f0eaff;
+      --s: 72px;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: var(--bg);
+      font-family: 'Lilita One', cursive;
+      font-weight: 400;
+    }
+
+    .stripes {
+      position: fixed;
+      inset: -300%;
+      width: 700%;
+      height: 700%;
+      background: repeating-linear-gradient(
+        -45deg,
+        var(--pink)  0px,
+        var(--pink)  var(--s),
+        var(--lime)  var(--s),
+        var(--lime)  calc(var(--s) * 2),
+        var(--red)   calc(var(--s) * 2),
+        var(--red)   calc(var(--s) * 3),
+        var(--brown) calc(var(--s) * 3),
+        var(--brown) calc(var(--s) * 4),
+        var(--blue)  calc(var(--s) * 4),
+        var(--blue)  calc(var(--s) * 5),
+        var(--bg)    calc(var(--s) * 5),
+        var(--bg)    calc(var(--s) * 6)
+      );
+      animation: slide 8s linear infinite;
+      opacity: 0.18;
+    }
+
+    @keyframes slide {
+      from { transform: translate(0, 0); }
+      to   { transform: translate(calc(var(--s) * 6), calc(var(--s) * 6)); }
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at center,
+        rgba(14,14,18,0.6) 0%,
+        rgba(14,14,18,0.1) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .card {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 60px 68px;
+      max-width: 500px;
+      width: 88%;
+      background: rgba(18, 16, 24, 0.80);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1.5px solid rgba(255,255,255,0.07);
+      border-radius: 22px;
+      box-shadow:
+        0 4px 0 0 rgba(180, 48, 96, 0.55),
+        0 24px 64px rgba(0,0,0,0.6);
+      animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(32px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    h1 {
+      font-family: 'Lilita One', cursive;
+      font-weight: 400;
+      font-size: clamp(2.6rem, 6.5vw, 4rem);
+      line-height: 1.12;
+      color: var(--ink);
+      opacity: 0;
+      animation: rise 0.8s 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    h1 .w2 { color: #e06898; }
+    h1 .w3 { color: #6ac84a; }
+
+    .divider {
+      width: 52px;
+      height: 3px;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--pink), var(--lime), var(--red), var(--brown), var(--blue));
+      margin: 22px auto;
+      opacity: 0;
+      animation: rise 0.8s 0.48s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      font-family: 'Lilita One', cursive;
+      font-weight: 400;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+      background: rgba(255,255,255,0.06);
+      border: 1.5px solid rgba(255,255,255,0.13);
+      padding: 13px 30px;
+      border-radius: 99px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.25s, color 0.3s;
+      opacity: 0;
+      animation: rise 0.8s 0.62s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--pink), var(--red), var(--blue), var(--lime));
+      opacity: 0;
+      transition: opacity 0.35s;
+      z-index: -1;
+    }
+
+    .btn:hover {
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(180, 48, 96, 0.4);
+    }
+
+    .btn:hover::before { opacity: 1; }
+
+    .corner {
+      position: absolute;
+      width: 15px; height: 15px;
+      border-style: solid;
+      border-radius: 3px;
+      opacity: 0.5;
+    }
+    .corner-tl { top: 11px; left: 11px;  border-color: var(--pink);  border-width: 2px 0 0 2px; }
+    .corner-tr { top: 11px; right: 11px; border-color: var(--lime);  border-width: 2px 2px 0 0; }
+    .corner-bl { bottom: 11px; left: 11px;  border-color: var(--red);   border-width: 0 0 2px 2px; }
+    .corner-br { bottom: 11px; right: 11px; border-color: var(--blue);  border-width: 0 2px 2px 0; }
+  </style>
+</head>
+<body>
+  <div class="stripes"></div>
+  <div class="overlay"></div>
+
+  <div class="card">
+    <div class="corner corner-tl"></div>
+    <div class="corner corner-tr"></div>
+    <div class="corner corner-bl"></div>
+    <div class="corner corner-br"></div>
+
+    <h1><span class="w1">Page </span><span class="w2">Coming</span><br><span class="w3">Soon!</span></h1>
+    <div class="divider"></div>
+    <a class="btn" href="https://www.youtube.com/@BabyCatsOfficial-Yeeps" target="_blank" rel="noopener">
+      (subscribe in the meantime)
+    </a>
+  </div>
+</body>
+</html>
